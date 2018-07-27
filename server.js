@@ -1,11 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require ('body-parser');
 
 const users = require('./routes/api/users');
 const form = require('./routes/api/form');
 const kyc = require('./routes/api/kyc');
 
 const app = express();
+
+//Body parser middleware
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
 //DB Config
 const db = require('./config/keys').mongoURI;
@@ -16,7 +21,7 @@ mongoose
     .then(() => console.log(`MongoB Connected at ${db}`))
     .catch (err => console.log(err));
     
-app.get('/', (req,res) => res.send('H222ell22323o') );
+app.get('/', (req,res) => res.send('Hello') );
 
 //User routes
 app.use('/api/users', users);
